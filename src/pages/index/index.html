@@ -19,11 +19,11 @@
   <div class="graph-container">
     <div class="graph">
       <p>100%</p>
-      <div class="graph-fill">
-        <p>50%</p>
+      <div class="graph-fill" [style.height]="totalConsumptionPercentage + '%'">
+        <p>{{totalConsumptionPercentage}}%</p>
       </div>
     </div>
-    <button ion-button>Voeg toe</button>
+    <button ion-button (click)=add()>Add</button>
   </div>
 
 </ion-content>
