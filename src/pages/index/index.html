@@ -20,7 +20,7 @@
     <div class="graph">
       <p>100%</p>
       <div class="graph-fill" [style.height]="totalConsumptionPercentage + '%'">
-        <p>{{totalConsumptionPercentage}}%</p>
+        <p>{{totalConsumptionPercentage | async}}%</p>
       </div>
     </div>
     <button ion-button (click)=add()>Add</button>

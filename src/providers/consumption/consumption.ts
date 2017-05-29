@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AuthProvider } from '../auth/auth';
 import 'rxjs/add/operator/map';
+import { Observable } from "rxjs/Observable";
 
 /*
   Generated class for the ConsumptionProvider provider.
@@ -10,24 +13,31 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ConsumptionProvider {
 
-  consumptionList = [
-    { product: { title: 'Pindakaas', salt: 1.2 }, grams: 100 }
-  ];
+  // consumptionList = [
+  //   { product: { title: 'Pindakaas', salt: 1.2 }, grams: 100 }
+  // ];
+
+  oConsumptionList: FirebaseListObservable<any[]>;
 
   maxConsumption = 100;
 
-  constructor() {
-    console.log('Hello ConsumptionProvider Provider');
+  constructor(db: AngularFireDatabase, public auth: AuthProvider) {
+    this.oConsumptionList = db.list('/consumption-list');
+
+    console.log('joehoeee', this.oConsumptionList);
   }
 
   getMaxSaltConsumption() {
     return this.maxConsumption;
   }
 
-  getTotalSaltConsumption() {
-    return this.consumptionList
-      .map(c => this.getGramsOfSaltForConsumption(c))
-      .reduce((a, b) => a + b, 0);
+  getTotalSaltConsumption(): Observable<number> {
+    return this.oConsumptionList
+      .map(cList => {
+        return cList
+          .map(c => this.getGramsOfSaltForConsumption(c))
+          .reduce((a, b) => a + b, 0);
+      });
   }
 
   getGramsOfSaltForConsumption(c) {
@@ -35,7 +45,7 @@ export class ConsumptionProvider {
   }
 
   addConsumption(product, grams) {
-    this.consumptionList.push({ product, grams });
+    this.oConsumptionList.push({ product, grams });
   }
 
 }

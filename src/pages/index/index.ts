@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ProductListPage } from "../product-list/product-list";
 import { ConsumptionProvider } from "../../providers/consumption/consumption";
+import { Observable } from "rxjs/Observable";
 
 /**
  * Generated class for the IndexPage page.
@@ -16,15 +17,15 @@ import { ConsumptionProvider } from "../../providers/consumption/consumption";
 })
 export class IndexPage {
 
-  totalConsumption;
-  maxConsumption;
-  totalConsumptionPercentage;
+  totalConsumption: Observable<number>;
+  maxConsumption: number;
+  totalConsumptionPercentage: Observable<number>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public consumptionProvider: ConsumptionProvider) { 
     console.log('joeheoeh')
     this.totalConsumption = this.consumptionProvider.getTotalSaltConsumption();
     this.maxConsumption = this.consumptionProvider.getMaxSaltConsumption();
-    this.totalConsumptionPercentage = this.totalConsumption / this.maxConsumption * 100;
+    this.totalConsumptionPercentage = this.totalConsumption.map(tc => tc / this.maxConsumption * 100);
   }
 
   ionViewDidLoad() {
@@ -33,11 +34,6 @@ export class IndexPage {
 
   add() {
     this.navCtrl.push(ProductListPage);
-  }
-
-  increaseTotalConsumtionWith(grams: number) {
-    this.totalConsumption += grams;
-    this.totalConsumptionPercentage = this.totalConsumption / this.maxConsumption * 100;
   }
 
 }
