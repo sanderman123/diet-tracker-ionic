@@ -47,7 +47,7 @@ export class ConsumptionPage {
         {
           text: 'Add',
           handler: data => {
-            this.consumptionProvider.addConsumption(this.product, data);
+            this.consumptionProvider.addConsumption(this.product, data.grams);
             this.navCtrl.popToRoot();
           }
         }

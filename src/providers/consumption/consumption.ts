@@ -45,6 +45,7 @@ export class ConsumptionProvider {
   }
 
   addConsumption(product, grams) {
+    grams = +grams;
     this.oConsumptionList.push({ product, grams });
   }
 
