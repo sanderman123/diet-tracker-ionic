@@ -4,7 +4,7 @@ node_js:
   
 cache: yarn
 
-script: yarn run ionic:build --prod
+script: yarn run build:prod
 
 after_success:
   - mkdir gh-pages
