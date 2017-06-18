@@ -18,7 +18,7 @@ after_success:
   - ls -a | grep -v ^.git$ | xargs rm -R
   - mv ../www/* .
   - ls
-  - git add .
+  - git add -A
   - git status
   - node -e "console.log(require('../package.json').version);" | xargs -i git commit -m "Deploy to GitHub Pages - {}"
   - git push -u origin gh-pages
