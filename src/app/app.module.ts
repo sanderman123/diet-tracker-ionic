@@ -13,8 +13,11 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { ItemDetailsPage } from '../pages/item-details/item-details';
 import { ListPage } from '../pages/list/list';
+import { IndexPageModule } from "../pages/index/index.module";
 import { IndexPage } from '../pages/index/index';
+import { ProductListPageModule } from "../pages/product-list/product-list.module";
 import { ProductListPage } from '../pages/product-list/product-list';
+import { ConsumptionPageModule } from "../pages/consumption/consumption.module";
 import { ConsumptionPage } from '../pages/consumption/consumption';
 import { ConsumptionProvider } from '../providers/consumption/consumption';
 import { AuthProvider } from '../providers/auth/auth';
@@ -34,16 +37,16 @@ const firebaseConfig = {
     HelloIonicPage,
     ItemDetailsPage,
     ListPage,
-    IndexPage,
-    ProductListPage,
-    ConsumptionPage,
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    IndexPageModule,
+    ProductListPageModule,
+    ConsumptionPageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
