@@ -16,7 +16,7 @@ after_success:
   - git fetch
   - git checkout -t origin/gh-pages
   - ls -a | grep -v ^.git$ | xargs rm -R
-  - mv ../www/* .
+  - mv ../platforms/browser/www/* .
   - ls
   - git add -A
   - git status
